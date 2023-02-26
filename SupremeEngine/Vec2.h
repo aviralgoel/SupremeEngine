@@ -29,4 +29,24 @@ public:
 	float Dot(const Vec2& v) const;
 	float Cross(const Vec2& v) const;
 
+	// operator overloading
+	Vec2& operator = (const Vec2& v);
+	bool operator == (const Vec2& v);
+	bool operator != (const Vec2& v);
+
+	Vec2 operator + (const Vec2& v) const;
+	Vec2 operator - (const Vec2& v) const;
+	Vec2 operator * (const float& n) const;
+	Vec2 operator / (const float& n) const;
+
+
+	Vec2& operator += (const Vec2& v) ;
+	Vec2& operator -= (const Vec2& v) ;
+	Vec2& operator *= (const float& n) ;
+	Vec2& operator /= (const float& n) ;
+
+	Vec2 operator - ();
+
+
+
 };

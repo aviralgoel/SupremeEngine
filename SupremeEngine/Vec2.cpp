@@ -1,6 +1,8 @@
 #include "Vec2.h"
 #include <cmath>
 #include <cassert>
+
+#pragma region Method definitions
 void Vec2::Add(const Vec2& v)
 {
 	x += v.x;
@@ -77,6 +79,92 @@ float Vec2::Cross(const Vec2& v) const
 	result = ((x * v.x) - (y * v.y));
 	return result;
 }
+#pragma endregion
+
+#pragma region Operator Overloading
+
+
+Vec2& Vec2::operator=(const Vec2& v)
+{
+	x = v.x;
+	y = v.y;
+	return *this;
+}
+bool Vec2::operator==(const Vec2& v)
+{
+	return (x == v.x && y == v.y);
+}
+bool Vec2::operator!=(const Vec2& v)
+{
+	return (x != v.x || y != v.y);
+}
+
+Vec2 Vec2::operator+(const Vec2& v) const
+{
+	return Vec2(x + v.x, y + v.y);
+}
+Vec2 Vec2::operator-(const Vec2& v) const
+{
+	return Vec2(x - v.x, y - v.y);
+
+}
+Vec2 Vec2::operator*(const float& n) const
+{
+	return Vec2(x * n, y * n);
+}
+Vec2 Vec2::operator/(const float& n) const
+{
+	if (n != 0)
+	{
+		return Vec2(x / n, y / n);
+	}
+	else
+	{
+		return Vec2(0.0f, 0.0f);
+	}
+}
+
+Vec2& Vec2::operator+=(const Vec2& v) 
+{	
+	x += v.x;
+	y += v.y;
+	return *this;
+	
+}
+Vec2& Vec2::operator-=(const Vec2& v) 
+{
+	x -= v.x;
+	y -= v.y;
+	return *this;
+
+}
+Vec2& Vec2::operator*=(const float& n) 
+{
+	x *= n;
+	y *= n;
+	return *this;
+}
+Vec2& Vec2::operator/=(const float& n) 
+{
+	if (n != 0)
+	{
+		x /= n;
+		y /= n;
+	}
+	else
+	{
+		x /= 0;
+		y /= 0;
+	}
+	return *this;
+
+}
+Vec2 Vec2::operator-()
+{
+	return Vec2(-1.0f*x, -1.0f*y);
+}
+#pragma endregion
+
 
 
 
