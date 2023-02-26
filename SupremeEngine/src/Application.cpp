@@ -42,9 +42,8 @@ void Application::Update() {
 // Render function (called several times per second to draw objects)
 ///////////////////////////////////////////////////////////////////////////////
 void Application::Render() {
-    // Clear Screen with Solid Color
-    //                        A R G B         
-    Graphics::ClearScreen(0xFF0000FF);
+    // Clear Screen with Solid Color (Format: A R G B)         
+    Graphics::ClearScreen(0xFF005555);
     Graphics::DrawFillCircle(200, 200, 40, 0xFFFFFFFF);
     // Render the backbuffer context for this frame
     Graphics::RenderFrame();
