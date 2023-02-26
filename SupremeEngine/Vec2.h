@@ -12,7 +12,7 @@ public:
 		: x(_x), y(_y) {}
 	~Vec2() = default;
 
-	// methods
+	// vector operations
 	void Add(const Vec2& v);
 	void Sub(const Vec2& v);
 	void Scale(const float& n);
@@ -25,6 +25,7 @@ public:
 	Vec2 UnitVector() const;
 	Vec2 Normal() const;
 
+	
 	float Dot(const Vec2& v) const;
 	float Cross(const Vec2& v) const;
 
