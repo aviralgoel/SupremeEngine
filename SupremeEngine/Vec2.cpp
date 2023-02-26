@@ -1,54 +1,84 @@
 #include "Vec2.h"
-
-void Vec2::add(const Vec2& v)
+#include <cmath>
+#include <cassert>
+void Vec2::Add(const Vec2& v)
 {
-    
+	x += v.x;
+	y += v.y;
 }
 
-void Vec2::sub(const Vec2& v)
+void Vec2::Sub(const Vec2& v)
 {
+	x -= v.x;
+	y -= v.y;
 }
 
-void Vec2::scale(const float s)
+void Vec2::Scale(const float& n)
 {
+	x *= n;
+	y *= n;
+}
+Vec2 Vec2::Rotate(const float& angle) const
+{
+	Vec2 result(0.0f, 0.0f);
+	result.x = x * cos(angle) - y * sin(angle);
+	result.y = x * sin(angle) + y * cos(angle);
+
+	return result;
+
 }
 
-Vec2 Vec2::rotate(const float angle) const
+float Vec2::Magnitude() const
 {
-    return Vec2();
+	float result = std::sqrtf((x * x) + (y * y));
+	return result;
 }
 
-float Vec2::magnitude() const
+float Vec2::MagnitudeSquared() const
 {
-    return 0.0f;
+	float result = (x * x) + (y * y);
+	return result;
 }
 
-float Vec2::magnitudeSquared() const
+void Vec2::Normalize()
 {
-    return 0.0f;
+	float length = Magnitude();
+	assert(length!=0);
+	x = x / length;
+	y = y / length;
 }
 
-Vec2& Vec2::normalize()
+Vec2 Vec2::UnitVector() const
 {
-    // TODO: insert return statement here
+	Vec2 result(0.0f, 0.0f);
+	float length = Magnitude();
+	result.x = x / length;
+	result.y = y / length;
+	result.Normalize();
+	return result;
 }
 
-Vec2 Vec2::unitVector() const
-{
-    return Vec2();
+Vec2 Vec2::Normal() const
+{	
+	Vec2 result(y, -1.0*x );
+	return result;
 }
 
-Vec2 Vec2::normal() const
+float Vec2::Dot(const Vec2& v) const
 {
-    return Vec2();
+	float result = 0.0f;
+	result = ((x * v.x) + (y * v.y));
+	return result;
 }
 
-float Vec2::dotProduct(Vec2 v) const
+float Vec2::Cross(const Vec2& v) const
 {
-    return 0.0f;
+	float result = 0;
+	result = ((x * v.x) - (y * v.y));
+	return result;
 }
 
-Vec2 Vec2::crossProduct(Vec2 v) const
-{
-    return Vec2();
-}
+
+
+
+

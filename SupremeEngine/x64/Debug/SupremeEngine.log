@@ -1,2 +1,5 @@
 ﻿  main.cpp
+  Vec2.cpp
+C:\Users\avira\source\repos\SupremeEngine\SupremeEngine\Vec2.cpp(63,21): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
   SupremeEngine.vcxproj -> C:\Users\avira\source\repos\SupremeEngine\x64\Debug\SupremeEngine.exe
