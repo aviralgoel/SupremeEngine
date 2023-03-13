@@ -1,15 +1,16 @@
-#ifndef VEC2_H
-#define VEC2_H
+#pragma once
 
-struct Vec2 {
-    float x;
-    float y;
+class Vec2 {
 
+public:
+    float m_x;
+    float m_y;
     Vec2();
     Vec2(float x, float y);
-    
     ~Vec2() = default;
 
+private:
+    
     void Add(const Vec2& v);                 // v1.Add(v2)
     void Sub(const Vec2& v);                 // v1.Sub(v2)
     void Scale(const float n);               // v1.Scale(n)
@@ -18,7 +19,7 @@ struct Vec2 {
     float Magnitude() const;                 // v1.Magnitude()
     float MagnitudeSquared() const;          // v1.MagnitudeSquared()
 
-    Vec2& Normalize();                       // v1.Normalize()
+    void Normalize();                       // v1.Normalize()
     Vec2 UnitVector() const;                 // v1.UnitVector()
     Vec2 Normal() const;                     // n = v1.Normal()
 
@@ -40,5 +41,3 @@ struct Vec2 {
     Vec2& operator *= (const float n);       // v1 *= n
     Vec2& operator /= (const float n);       // v1 /= n
 };
-
-#endif
