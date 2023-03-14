@@ -29,6 +29,7 @@ bool Graphics::OpenWindow() {
     m_windowWidth = display_mode.w;
     m_windowHeight = display_mode.h;
     
+    
     //create a full screen window
     m_window = SDL_CreateWindow(NULL, 0, 0, m_windowWidth, m_windowHeight, SDL_WINDOW_BORDERLESS);
     if (!m_window) {
