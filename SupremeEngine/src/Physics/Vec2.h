@@ -8,6 +8,20 @@ public:
     Vec2();
     Vec2(float x, float y);
     ~Vec2() = default;
+    Vec2& operator = (const Vec2& v);        // v1 = v2
+    bool operator == (const Vec2& v) const;  // v1 == v2
+    bool operator != (const Vec2& v) const;  // v1 != v2
+
+    Vec2 operator + (const Vec2& v) const;   // v1 + v2
+    Vec2 operator - (const Vec2& v) const;   // v1 - v2
+    Vec2 operator * (const float n) const;   // v1 * n
+    Vec2 operator / (const float n) const;   // v1 / n
+    Vec2 operator - ();                      // -v1
+
+    Vec2& operator += (const Vec2& v);       // v1 += v2
+    Vec2& operator -= (const Vec2& v);       // v1 -= v2
+    Vec2& operator *= (const float n);       // v1 *= n
+    Vec2& operator /= (const float n);       // v1 /= n
 
 private:
     
@@ -26,18 +40,5 @@ private:
     float Dot(const Vec2& v) const;          // v1.Dot(v2)
     float Cross(const Vec2& v) const;        // v1.Cross(v2)
 
-    Vec2& operator = (const Vec2& v);        // v1 = v2
-    bool operator == (const Vec2& v) const;  // v1 == v2
-    bool operator != (const Vec2& v) const;  // v1 != v2
-    
-    Vec2 operator + (const Vec2& v) const;   // v1 + v2
-    Vec2 operator - (const Vec2& v) const;   // v1 - v2
-    Vec2 operator * (const float n) const;   // v1 * n
-    Vec2 operator / (const float n) const;   // v1 / n
-    Vec2 operator - ();                      // -v1
 
-    Vec2& operator += (const Vec2& v);       // v1 += v2
-    Vec2& operator -= (const Vec2& v);       // v1 -= v2
-    Vec2& operator *= (const float n);       // v1 *= n
-    Vec2& operator /= (const float n);       // v1 /= n
 };

@@ -5,10 +5,19 @@
 #include "Physics/Vec2.h"
 #include <vector>
 
-#define COLOR_BLUE 0xFF0000FF
-#define COLOR_LIME 0xFF00FF55
-#define COLOR_PINK 0xFFFFC0CB
-#define COLOR_PURPLE 0xFFA020F0
+
+enum COLORS
+{   // Format is ARGB
+    COLOR_BLUE = 0xFF0000FF,
+	COLOR_LIME = 0xFF00FF55,
+	COLOR_PINK = 0xFFFFC0CB,
+	COLOR_PURPLE = 0xFFA020F0,
+	COLOR_WHITE = 0xFFFFFFFF,
+	COLOR_BLACK = 0xFF000000,
+	COLOR_RED = 0xFFFF0000
+};
+
+
 
 class Graphics {
 private:

@@ -37,6 +37,7 @@ bool Graphics::OpenWindow() {
         return false;
     }
     // create a rendering context
+    SDL_SetHint(SDL_HINT_RENDER_VSYNC, "1");
     m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     if (!m_renderer) {
         std::cerr << "Error creating SDL renderer\n";
@@ -47,14 +48,17 @@ bool Graphics::OpenWindow() {
 
 void Graphics::ClearScreen(Uint32 color) {
     // associate a color with the rendering context
-    SDL_SetRenderDrawColor(m_renderer, color >> 16, color >> 8, color, 255);
+    Uint8 r = color >> 16, g = color >> 8, b = color;
+    SDL_SetRenderDrawColor(m_renderer, r, g, b, 255);
     // wash the context with that color
     SDL_RenderClear(m_renderer);
 }
 
 void Graphics::RenderFrame() {
-
-    // render the backbuffer all at once
+    // Do all sorts of rendering here, keep updating the back buffer
+    // 
+    
+    // this backbuffer now becomes the current buffer
     SDL_RenderPresent(m_renderer);
 }
 
