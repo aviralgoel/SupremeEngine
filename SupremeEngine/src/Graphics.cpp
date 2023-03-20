@@ -29,6 +29,7 @@ bool Graphics::OpenWindow() {
     m_windowWidth = display_mode.w;
     m_windowHeight = display_mode.h;
     
+    
     //create a full screen window
     m_window = SDL_CreateWindow(NULL, 0, 0, m_windowWidth, m_windowHeight, SDL_WINDOW_BORDERLESS);
     if (!m_window) {
@@ -85,7 +86,7 @@ void Graphics::DrawPolygon(int x, int y, const std::vector<Vec2>& vertices, Uint
     for (int i = 0; i < vertices.size(); i++) {
         int currIndex = i;
         int nextIndex = (i + 1) % vertices.size();
-        lineColor(m_renderer, vertices[currIndex].x, vertices[currIndex].y, vertices[nextIndex].x, vertices[nextIndex].y, color);
+        lineColor(m_renderer, vertices[currIndex].m_x, vertices[currIndex].m_y, vertices[nextIndex].m_x, vertices[nextIndex].m_y, color);
     }
     filledCircleColor(m_renderer, x, y, 1, color);
 }
@@ -94,10 +95,10 @@ void Graphics::DrawFillPolygon(int x, int y, const std::vector<Vec2>& vertices, 
     std::vector<short> vx;
     std::vector<short> vy;
     for (int i = 0; i < vertices.size(); i++) {
-        vx.push_back(static_cast<int>(vertices[i].x));
+        vx.push_back(static_cast<int>(vertices[i].m_x));
     }
     for (int i = 0; i < vertices.size(); i++) {
-        vy.push_back(static_cast<int>(vertices[i].y));
+        vy.push_back(static_cast<int>(vertices[i].m_y));
     }
     filledPolygonColor(m_renderer, &vx[0], &vy[0], vertices.size(), color);
     filledCircleColor(m_renderer, x, y, 1, 0xFF000000);

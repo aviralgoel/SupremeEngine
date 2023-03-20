@@ -5,6 +5,11 @@
 #include "Physics/Vec2.h"
 #include <vector>
 
+#define COLOR_BLUE 0xFF0000FF
+#define COLOR_LIME 0xFF00FF55
+#define COLOR_PINK 0xFFFFC0CB
+#define COLOR_PURPLE 0xFFA020F0
+
 class Graphics {
 private:
     static int m_windowWidth;
