@@ -37,7 +37,7 @@ bool Graphics::OpenWindow() {
         return false;
     }
     // create a rendering context
-    SDL_SetHint(SDL_HINT_RENDER_VSYNC, "1");
+    SDL_SetHint(SDL_HINT_RENDER_VSYNC, "0");
     m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     if (!m_renderer) {
         std::cerr << "Error creating SDL renderer\n";
@@ -72,6 +72,11 @@ void Graphics::DrawCircle(int x, int y, int radius, float angle, Uint32 color) {
 }
 
 void Graphics::DrawFillCircle(int x, int y, int radius, Uint32 color) {
+    filledCircleColor(m_renderer, x, y, radius, color);
+}
+void Graphics::DrawFillCircle(Vec2 _position, int radius, Uint32 color) {
+    int x = _position.m_x;
+    int y = _position.m_y;
     filledCircleColor(m_renderer, x, y, radius, color);
 }
 

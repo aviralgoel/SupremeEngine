@@ -32,12 +32,24 @@ void Application::Input() {
 // Update function (called once per frame)
 void Application::Update() {
 
+    // frame rate independence
     static int timePreviousFrame; // default value is 0
-    while (!SDL_TICKS_PASSED(SDL_GetTicks(), timePreviousFrame + MILLISECS_PER_FRAME));
+    //while (!SDL_TICKS_PASSED(SDL_GetTicks(), timePreviousFrame + MILLISECS_PER_FRAME));
+    //int timeToWait = MILLISECS_PER_FRAME - (SDL_GetTicks() - timePreviousFrame);
+    //if (timeToWait > 0)
+    //{
+    //    SDL_Delay(timeToWait);
+    //}
+    float deltaTime = (SDL_GetTicks() - timePreviousFrame) / 1000.0f;
+    if (deltaTime > 0.016)
+    {
+        deltaTime = 0.016f;
+    }
+
     timePreviousFrame = SDL_GetTicks();
 
-    m_particle->m_velocity = Vec2(2.0f, 0.0f);
-    m_particle->m_position += m_particle->m_velocity;
+    m_particle->setVelocity(Vec2(100.0f*deltaTime, 30.0f*deltaTime));
+    m_particle->setPosition(m_particle->getPosition() + m_particle->getVelocity());
 }
 
 // Render function (called several times per second to draw objects)
@@ -45,7 +57,7 @@ void Application::Render() {
     // Clear Screen with Solid Color (Format: A R G B)         
     Graphics::ClearScreen(COLOR_PURPLE);
     Graphics::DrawFillCircle(200, 200, 40, COLOR_WHITE);
-    Graphics::DrawFillCircle(m_particle->m_position.m_x, m_particle->m_position.m_y, 20, COLOR_LIME);
+    Graphics::DrawFillCircle(m_particle->getPosition(), 20, COLOR_LIME);
     // Render the backbuffer context for this frame
     Graphics::RenderFrame();
 }
