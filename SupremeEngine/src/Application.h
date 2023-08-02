@@ -7,6 +7,7 @@ class Application {
     private:
         bool m_running = false;
         Particle* m_particle;
+        int m_lastFrameTime = 0;
 
 
     public:

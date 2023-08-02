@@ -10,7 +10,7 @@ bool Application::IsRunning() {
 void Application::Setup() {
     m_running = Graphics::OpenWindow();
     // TODO: setup objects in the scene
-    m_particle = new Particle(Vec2(100, 100), 1.0f);
+    m_particle = new Particle(Vec2(100, 100), 10.0f, 10.0f);
 }
 
 // Input Detection & Processing (called every frame) 
@@ -32,32 +32,27 @@ void Application::Input() {
 // Update function (called once per frame)
 void Application::Update() {
 
-    // frame rate independence
-    static int timePreviousFrame; // default value is 0
-    //while (!SDL_TICKS_PASSED(SDL_GetTicks(), timePreviousFrame + MILLISECS_PER_FRAME));
-    //int timeToWait = MILLISECS_PER_FRAME - (SDL_GetTicks() - timePreviousFrame);
+    //int timeToWait = MILLISECS_PER_FRAME - (SDL_GetTicks() - m_lastFrameTime);
     //if (timeToWait > 0)
     //{
     //    SDL_Delay(timeToWait);
     //}
-    float deltaTime = (SDL_GetTicks() - timePreviousFrame) / 1000.0f;
-    if (deltaTime > 0.016)
-    {
-        deltaTime = 0.016f;
-    }
+    //m_lastFrameTime = SDL_GetTicks();
 
-    timePreviousFrame = SDL_GetTicks();
+    float deltaTime = (SDL_GetTicks() - m_lastFrameTime)/1000.0f;
+    m_lastFrameTime = SDL_GetTicks();
 
-    m_particle->setVelocity(Vec2(100.0f*deltaTime, 30.0f*deltaTime));
-    m_particle->setPosition(m_particle->getPosition() + m_particle->getVelocity());
+    m_particle->m_velocity = Vec2(100*deltaTime, 100*deltaTime);
+    m_particle->m_position += m_particle->m_velocity;
+
 }
 
 // Render function (called several times per second to draw objects)
 void Application::Render() {
     // Clear Screen with Solid Color (Format: A R G B)         
     Graphics::ClearScreen(COLOR_PURPLE);
-    Graphics::DrawFillCircle(200, 200, 40, COLOR_WHITE);
-    Graphics::DrawFillCircle(m_particle->getPosition(), 20, COLOR_LIME);
+    //Graphics::DrawFillCircle(200, 200, 40, COLOR_WHITE);
+    Graphics::DrawFillCircle(m_particle->m_position.m_x, m_particle->m_position.m_y, m_particle->m_radius, COLOR_BLUE);
     // Render the backbuffer context for this frame
     Graphics::RenderFrame();
 }
