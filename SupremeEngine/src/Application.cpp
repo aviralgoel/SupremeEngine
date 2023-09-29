@@ -9,7 +9,6 @@ bool Application::IsRunning() {
 // Setup function (called once per game)
 void Application::Setup() {
     m_running = Graphics::OpenWindow();
-    // TODO: setup objects in the scene
     m_particle = new Particle(Vec2(100, 100), 10.0f, 10.0f);
 }
 
@@ -32,28 +31,45 @@ void Application::Input() {
 // Update function (called once per frame)
 void Application::Update() {
 
-    //int timeToWait = MILLISECS_PER_FRAME - (SDL_GetTicks() - m_lastFrameTime);
-    //if (timeToWait > 0)
-    //{
-    //    SDL_Delay(timeToWait);
-    //}
-    //m_lastFrameTime = SDL_GetTicks();
+
 
     float deltaTime = (SDL_GetTicks() - m_lastFrameTime)/1000.0f;
     m_lastFrameTime = SDL_GetTicks();
+    if (deltaTime > 0.016) 	deltaTime = 0.016; 
 
-    m_particle->m_velocity = Vec2(100*deltaTime, 100*deltaTime);
-    m_particle->m_position += m_particle->m_velocity;
+    m_particle->m_acceleration = Vec2(2.0f, 9.8f);
+    m_particle->m_velocity += m_particle->m_acceleration * deltaTime * PIXELS_PER_METER;
+    m_particle->m_position += m_particle->m_velocity * deltaTime;
 
+    CheckBoundaryLimits();
+
+
+}
+
+void Application::CheckBoundaryLimits()
+{
+    if (m_particle->m_position.m_y > Graphics::Height() - m_particle->m_radius) { // down wall
+        m_particle->m_position.m_y = Graphics::Height() - m_particle->m_radius;
+        m_particle->m_velocity.m_y *= -0.9f;
+    }
+    if (m_particle->m_position.m_x > Graphics::Width() - m_particle->m_radius) { // right wall
+        m_particle->m_position.m_x = Graphics::Width() - m_particle->m_radius;
+        m_particle->m_velocity.m_x *= -0.9f;
+    }
+    if (m_particle->m_position.m_x <= m_particle->m_radius) { // left wall
+        m_particle->m_position.m_x = m_particle->m_radius;
+        m_particle->m_velocity.m_x *= -0.9f;
+    }
+    if (m_particle->m_position.m_y <= m_particle->m_radius) { // up wall
+        m_particle->m_position.m_y = m_particle->m_radius;
+        m_particle->m_velocity.m_y *= -0.9f;
+    }
 }
 
 // Render function (called several times per second to draw objects)
 void Application::Render() {
-    // Clear Screen with Solid Color (Format: A R G B)         
     Graphics::ClearScreen(COLOR_PURPLE);
-    //Graphics::DrawFillCircle(200, 200, 40, COLOR_WHITE);
     Graphics::DrawFillCircle(m_particle->m_position.m_x, m_particle->m_position.m_y, m_particle->m_radius, COLOR_BLUE);
-    // Render the backbuffer context for this frame
     Graphics::RenderFrame();
 }
 

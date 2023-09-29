@@ -9,7 +9,7 @@ public:
 	Vec2 m_velocity;
 	Vec2 m_acceleration;
 	float m_mass;
-	float m_radius;
+	float m_radius; 
 
 	Particle() = default;
 	Particle(Vec2 _position, float _mass, float _radius);

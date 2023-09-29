@@ -17,6 +17,7 @@ class Application {
         void Setup();
         void Input();
         void Update();
+        void CheckBoundaryLimits();
         void Render();
         void Destroy();
 };
